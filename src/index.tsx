@@ -1,10 +1,10 @@
-import * as React from "react";
-import { render } from "react-dom";
+import * as React from 'react'
+import { render } from 'react-dom'
 // import { Clock } from "./components/ClockClass";
-import { Clock } from "./components/Clock";
-import { TimeContextProvider } from "./components/Clock/context";
+import { Clock } from './components/Clock'
+import { TimeContextProvider } from './components/Clock/context'
 
-import "./styles.css";
+import './styles.css'
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
         <Clock />
       </TimeContextProvider>
     </div>
-  );
+  )
 }
 
-const rootElement = document.getElementById("root");
-render(<App />, rootElement);
+const rootElement = document.getElementById('root')
+render(<App />, rootElement)

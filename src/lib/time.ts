@@ -130,8 +130,8 @@ export class Time {
       this._hourType = value as HourType
       this.triggerCallbackIfExists(key, value as any)
     } else if (['hours', 'minutes', 'seconds'].indexOf(key) > -1) {
-      if (this['_' + key]! !== (value as number)) {
-        this['_' + key] = value as number
+      if ((this as any)['_' + key] !== (value as number)) {
+        ;(this as any)['_' + key] = value as number
         this.triggerCallbackIfExists(key, value as any)
       }
     }
@@ -142,7 +142,7 @@ export class Time {
     params: EventParams[TEvent],
   ) {
     if (event in this.callbacks) {
-      this.callbacks[event](params, this.getTimeEvent())
+      ;(this.callbacks[event] as any)(params, this.getTimeEvent())
     }
   }
 }

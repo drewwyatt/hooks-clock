@@ -21,7 +21,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "check-format": "prettier --check src/**/*.ts{,x}",
-    "format": "prettier --write src/**/*.ts{,x}"
+    "format": "prettier --write src/**"
   },
   "browserslist": [
     ">0.2%",

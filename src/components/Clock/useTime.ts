@@ -1,49 +1,43 @@
-import { useCallback, useContext, useEffect } from "react";
-import {
-  TimeContext,
-  setHourType,
-  setHours,
-  setMinutes,
-  setSeconds,
-  init,
-  State
-} from "./context";
-import { Time, AmPm, HourType } from "../../lib";
-export { AmPm, HourType };
+import { useCallback, useContext, useEffect } from 'react'
+import { Time, AmPm, HourType } from '../../lib'
+import { TimeContext } from './context'
+import { actions, State } from './state'
+
+export { AmPm, HourType }
 
 const toCallback = <T extends (payload: any) => any>(
   dispatch: React.Dispatch<any>,
-  actionCreator: T
+  actionCreator: T,
 ) => (...p: Parameters<T>) => {
-  dispatch((actionCreator as any)(...p));
-};
+  dispatch((actionCreator as any)(...p))
+}
 
 export const useTime = (): [State, (h: HourType) => void] => {
-  const { state, dispatch } = useContext(TimeContext);
-  let time: Time;
+  const { state, dispatch } = useContext(TimeContext)
+  let time: Time | undefined
   useEffect(() => {
-    time = new Time();
+    time = new Time()
     dispatch(
-      init({
+      actions.init({
         amPm: time.getAmPm(),
         hours: time.getHours(),
         hourType: time.getHourType(),
         minutes: time.getMinutes(),
-        seconds: time.getSeconds()
-      })
-    );
-    time.on("hours", toCallback(dispatch, setHours));
-    time.on("minutes", toCallback(dispatch, setMinutes));
-    time.on("seconds", toCallback(dispatch, setSeconds));
-    time.on("hourType", toCallback(dispatch, setHourType as any));
-  }, []);
+        seconds: time.getSeconds(),
+      }),
+    )
+    time.on('hours', toCallback(dispatch, actions.setHours))
+    time.on('minutes', toCallback(dispatch, actions.setMinutes))
+    time.on('seconds', toCallback(dispatch, actions.setSeconds))
+    time.on('hourType', toCallback(dispatch, actions.setHourType as any))
+  }, [])
 
   const setHourTypeOnTime = useCallback(
     (hourType: HourType) => {
-      time.setHourType(hourType);
+      time && time.setHourType(hourType)
     },
-    [time]
-  );
+    [time],
+  )
 
-  return [state, setHourTypeOnTime];
-};
+  return [state, setHourTypeOnTime]
+}
