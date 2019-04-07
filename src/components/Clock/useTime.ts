@@ -12,8 +12,10 @@ const toCallback = <T extends (payload: any) => any>(
   dispatch((actionCreator as any)(...p))
 }
 
-export const useTime = (): [State, (h: HourType) => void] => {
-  const { state, dispatch } = useContext(TimeContext)
+export const useTime = (
+  constext: typeof TimeContext = TimeContext,
+): [State, (h: HourType) => void] => {
+  const { state, dispatch } = useContext(constext)
   let time: Time | undefined
   useEffect(() => {
     time = new Time()
