@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.tsx",
+  "license": "MIT",
   "dependencies": {
     "react": "16.8.4",
     "react-dom": "16.8.4",
@@ -18,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "check-format": "prettier --check src/**/*.ts{,x}",
+    "format": "prettier --write src/**/*.ts{,x}"
   },
   "browserslist": [
     ">0.2%",
